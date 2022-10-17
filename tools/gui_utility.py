@@ -4,7 +4,7 @@ Custom utility functions for PyQt tables
 
 """
 
-from PyQt4 import QtCore, QtGui
+from PySide6 import QtCore, QtGui, QtWidgets
 import numpy as np
 import csv
 
@@ -137,13 +137,13 @@ def write_tables_to_csv_file(folder_name, variables, edit_tables):
         return False
 
 
-class EditTable(QtGui.QTableWidget):
+class EditTable(QtWidgets.QTableWidget):
     """Overloaded version of the QTableWidget which adds Copy/Paste functionality to the table."""
 
     def __init__(self, main_window, data=[], headings=[], allowCopy=True, allowPaste=True, readOnly=False,
                  alternatingRowColors=False, allowShortcut=True, *__args):
         """Constructor which will set up Copy & Paste actions and populate table headings and data."""
-        super(QtGui.QTableWidget, self).__init__()
+        # super(QtWidgets.QTableWidget, self).__init__()
         super().__init__(*__args)
         self.setup(main_window, allowCopy, allowPaste, allowShortcut)
         if len(data) > 0:

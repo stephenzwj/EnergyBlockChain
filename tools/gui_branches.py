@@ -1,17 +1,17 @@
-from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtCore import Qt
 import numpy as np
 import tools.gui_utility as gui_utility
 import tools.gui_globals as gui_globals
 
 
-class branches_ui(QtGui.QVBoxLayout):
+class branches_ui(QtWidgets.QVBoxLayout):
 
     def setup(self, window):
         """Setup for branches tab"""
         self.main_window = window
 
-        hbox = QtGui.QHBoxLayout()
+        hbox = QtWidgets.QHBoxLayout()
         hbox.setAlignment(Qt.AlignLeft)
 
         headings = ['Bus1', 'Bus2', 'R', 'X', 'B', 'Rate A', 'Rate B', 'Rate C', 'Ratio', 'Angle', 'Status', 'Ang min',
@@ -145,7 +145,7 @@ class Branches_EditTable(gui_utility.EditTable):
 
         if allowCopy or allowPaste:
             self.setContextMenuPolicy(Qt.ActionsContextMenu)
-            self.setSelectionMode(QtGui.QAbstractItemView.ContiguousSelection)
+            self.setSelectionMode(QtWidgets.QAbstractItemView.ContiguousSelection)
 
     def addrow_fn(self):
         """Function for the Add Row action."""
@@ -172,7 +172,7 @@ class Branches_EditTable(gui_utility.EditTable):
                 self.setColumnCount(data_columns)
                 for r in range(0, data_rows):
                     for c in range(0, data_columns):
-                        item = QtGui.QTableWidgetItem()
+                        item = QtWidgets.QTableWidgetItem()
                         item.setTextAlignment(Qt.AlignHCenter)
                         if c == 0 or c == 1:
                             item.setText(str(int(data[r][c])))

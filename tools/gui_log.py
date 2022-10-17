@@ -6,11 +6,11 @@ Message log tab user interface
 """
 
 import os, sys
-from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtCore import Qt
 import numpy as np
 
-class log_ui(QtGui.QVBoxLayout): 
+class log_ui(QtWidgets.QVBoxLayout):
     
     def setup(self, window):   
         """Setup for message log tab"""
@@ -18,10 +18,10 @@ class log_ui(QtGui.QVBoxLayout):
         
         self.main_window = window        
         
-        hbox = QtGui.QHBoxLayout()
+        hbox = QtWidgets.QHBoxLayout()
         hbox.setAlignment(Qt.AlignLeft)
         
-        self.textBox = QtGui.QTextEdit()
+        self.textBox = QtWidgets.QTextEdit()
         self.textBox.setReadOnly(True)
         self.textBox.setFont(font)
 

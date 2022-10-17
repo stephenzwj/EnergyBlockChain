@@ -5,7 +5,8 @@ import random
 import numpy as np
 import pandas as pd
 
-from PyQt4 import QtCore, QtGui
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtWidgets import QApplication
 from pypower.idx_bus import VM, VA
 from pypower.loadcase import loadcase
 from pypower.ppver import ppver
@@ -22,7 +23,7 @@ import tools.gui_log as gui_log
 T = 600
 
 class TimeThread(QtCore.QThread):
-    signal_time = QtCore.pyqtSignal(str, int)  # 信号
+    signal_time = QtCore.Signal(str, int)  # 信号
 
     def __init__(self, parent=None):
         super(TimeThread, self).__init__(parent)
@@ -40,7 +41,7 @@ class TimeThread(QtCore.QThread):
             self.sleep(T)
 
 
-class Window(QtGui.QMainWindow):
+class Window(QtWidgets.QMainWindow):
 
     def __init__(self):
         super(Window, self).__init__()
@@ -78,11 +79,11 @@ class Window(QtGui.QMainWindow):
         """
         Tabs
         """
-        tab_widget = QtGui.QTabWidget()
-        tab1 = QtGui.QWidget()
-        tab2 = QtGui.QWidget()
-        tab3 = QtGui.QWidget()
-        tab4 = QtGui.QWidget()
+        tab_widget = QtWidgets.QTabWidget()
+        tab1 = QtWidgets.QWidget()
+        tab2 = QtWidgets.QWidget()
+        tab3 = QtWidgets.QWidget()
+        tab4 = QtWidgets.QWidget()
         self.tab_widget = tab_widget
 
         tab_widget.addTab(tab1, "Buses")
@@ -108,7 +109,7 @@ class Window(QtGui.QMainWindow):
         exitAction = QtGui.QAction(QtGui.QIcon('icons/exit.png'), '&Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit application')
-        exitAction.triggered.connect(QtGui.qApp.quit)
+        exitAction.triggered.connect(QApplication.quit)
 
         refreshAction = QtGui.QAction(QtGui.QIcon('icons/refresh.ico'), '&Refresh', self)
         refreshAction.setShortcut('F5')
@@ -196,7 +197,7 @@ class Window(QtGui.QMainWindow):
 
     def centre(self):
         qr = self.frameGeometry()
-        cp = QtGui.QDesktopWidget().availableGeometry().center()
+        cp = QtGui.QGuiApplication.primaryScreen().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
@@ -321,7 +322,7 @@ class Window(QtGui.QMainWindow):
 
 
 def main():
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     w = Window()
     w.show()
 
